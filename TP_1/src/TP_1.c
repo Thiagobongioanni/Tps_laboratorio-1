@@ -82,7 +82,7 @@ int main(void)
 	    	}
 
 	     break;
-
+//
 	     case 3:
 	            if(precioAerolineas >= 0 && precioLatam >= 0)
 	            {
