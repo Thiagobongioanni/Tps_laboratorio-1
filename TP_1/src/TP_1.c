@@ -10,7 +10,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "calculo_resultados_validaciones.h"
+#include "calculo_resultados_.h"
 
 int main(void)
 {
@@ -35,16 +35,13 @@ int main(void)
 	//calculo unitario
 	float calculoUAerolineas;
 	float calculoULatam;
-	//calculo de diferencia
+	//diferencia de precio
 	float calculoDif;
-	//carga forzada
-	int kilometrosF = 7090;
-	float precioAerolineasF=162965;
-	float precioLatamF=159339;
+
 
 	do
 	{
-      printf("\n1)Ingresar kilometros  \n2)Ingresar precios de vuelos \n3)Calcular todos los costos\n4)Informar resultados\n5)Carga forzada de datos\n6)Salir\n");
+      printf("\n1)Ingresar kilometros  "  "\n2)Ingresar precios de vuelos "	  "\n3)Calcular todos los costos"	  "\n4)Informar resultados"	  "\n5)Carga forzada de datos"	  "\n6)Salir\n");
 	  printf("\ningrese una opcion: ");
 	  scanf("%d", &opcion);
 
@@ -82,47 +79,17 @@ int main(void)
 	    	}
 
 	     break;
-//
+
 	     case 3:
-	            if(precioAerolineas >= 0 && precioLatam >= 0)
-	            {
-	    	       calculoDAerolineas=calculosDebito(precioAerolineas);
-	    	       calculoCAerolineas=calculosCredito(precioAerolineas);
-	    	       calculosBAerolineas=calculosBitcoin(precioAerolineas);
-	    	       calculoUAerolineas=calculoUnitario(kilometros,precioAerolineas);
-
-	    	       calculoDif=calculoDiferenciaPrecios(precioAerolineas,precioLatam);
-
-	    	       calculoDLatam=calculosDebito(precioLatam);
-	    	       calculosCLatam=calculosCredito(precioLatam);
-	    	       calculosBLatam=calculosBitcoin(precioLatam);
-	    	       calculoULatam=calculoUnitario(kilometros,precioLatam);
-	            }
+	    	 funcionesDeCalculo(kilometros,precioAerolineas,precioLatam,&calculoDAerolineas,&calculoCAerolineas,&calculosBAerolineas,&calculoUAerolineas,&calculoDif,&calculoDLatam,&calculosCLatam,&calculosBLatam,&calculoULatam);
 	     break;
 
 	     case 4:
-	    	    printf("\nKMs ingresados: %d km\n",kilometros);
-
-	    	    printf("\nprecio aerolineas:$ %.2f",precioAerolineas);
-
-	    	    printf("\nel precio de aerolineas con debito es: %.2f\n",calculoDAerolineas);
-	    	    printf("el precio de aerolineas con credito es: %.2f\n",calculoCAerolineas);
-	    	    printf("el precio de aerolineas con bitcoin es: %f\n",calculosBAerolineas);
-	    	    printf("\el precio unitario de aerolineas es: %.2f\n",calculoUAerolineas);
-
-	    	    printf("\nprecio  latam:$ %.2f",precioLatam);
-
-	    	    printf("\nel precio de Latam con debito es %.2f\n",calculoDLatam);
-	    	    printf("el precio de latam con credito es: %.2f\n",calculosCLatam);
-	    	    printf("el precio de latam con bitcoin es: %f\n",calculosBLatam);
-	    	    printf("\el precio unitario de latam es: %.2f\n",calculoULatam);
-	    	    printf("\nla diferencia de precio es %.2f\n",calculoDif);
-
-
+	    	 mostrarResultados(kilometros,precioAerolineas,precioLatam,calculoDAerolineas,calculoDLatam,calculoCAerolineas,calculosCLatam,calculosBAerolineas,calculosBLatam,calculoUAerolineas,calculoULatam,calculoDif);
 	     break;
 
 	     case 5:
-	    	 cargaForzada(kilometrosF,precioAerolineasF,precioLatamF);
+	    	 cargaForzada();
 	     break;
 	     case 6:
 	     break;
