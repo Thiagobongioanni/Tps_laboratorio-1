@@ -19,7 +19,7 @@ int main(void)
 	//variable utilizada para las opciones del menu
 	int opcion;
 	//aqui se guardan los kilometros ingresados
-	int kilometros=0;
+	float kilometros=0;
 	//precios ingresados
     float precioAerolineas;
 	float precioLatam;
@@ -49,35 +49,11 @@ int main(void)
 	  {
 	     case 1:
 	           printf("\n ingrese los kilometros: ");
-	           scanf("%d", &kilometros);
-	           if(kilometros < 0 || kilometros == 0)
-	           {
-	        	     printf("\ncantidad invalida vuelva a ingresar los datos: ");
-	        	     scanf("%d", &kilometros);
-	           }
-
+	           scanf("%f", &kilometros);
 	     break;
 
 	     case 2:
-	        if(kilometros > 0 || kilometros < 510000000000 )
-	    	{
-	           printf("ingrese el precio de aereolineas: ");
-	           scanf("%f", &precioAerolineas);
-
-	           printf("ingrese el precio de latam: ");
-	           scanf("%f", &precioLatam);
-
-	    	}else if(precioAerolineas < 0)
-	    	{
-	    	   printf("\nporfavor ingrese un precio valido: ");
-	    	   scanf("%f", &precioAerolineas);
-	    	}
-	    	else if(precioLatam < 0)
-	    	{
-	    		    printf("\nporfavor ingrese un precio valido: ");
-	    		    scanf("%f", &precioLatam);
-	    	}
-
+	    	 pedirDatos(&kilometros,&precioAerolineas,&precioLatam);
 	     break;
 
 	     case 3:
