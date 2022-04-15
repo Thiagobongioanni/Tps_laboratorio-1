@@ -69,7 +69,7 @@ int main(void)
 	     break;
 	     case 6:
 	     break;
-
+//
 	     default:
 	    	     printf("\nopcion no valida");
 	     break;
