@@ -53,20 +53,20 @@ void cargaForzada();
  * recibe 12 parametros(11 tipo float y 1 tipo int)
  * no contiene return es de tipo void
  */
-void mostrarResultados(float kilometros,float precioAerolineas,float precioLatam,float calculoDAerolineas,float calculoDLatam,float calculoCAerolineas,float calculosCLatam,float calculosBAerolineas,float calculosBLatam,float calculoUAerolineas,float calculoULatam,float calculoDif);
+void mostrarResultados(int kilometros,float precioAerolineas,float precioLatam,float calculoDAerolineas,float calculoDLatam,float calculoCAerolineas,float calculosCLatam,float calculosBAerolineas,float calculosBLatam,float calculoUAerolineas,float calculoULatam,float calculoDif);
 
 
 /**esta funcion contiene todas las llamadas de funciones de tipo calculo
  * recibe 12 parametros(11 tipo float y 1 tipo int)
  * el return devuelve 0 si sale todo bien
  */
-float funcionesDeCalculo(float kilometros,float precioAerolineas,float precioLatam,float*calculoDAerolineas,float*calculoCAerolineas,float*calculosBAerolineas,float*calculoUAerolineas,float*calculoDif,float*calculoDLatam,float*calculosCLatam,float*calculosBLatam,float*calculoULatam);
+float funcionesDeCalculo(int kilometros,float precioAerolineas,float precioLatam,float*calculoDAerolineas,float*calculoCAerolineas,float*calculosBAerolineas,float*calculoUAerolineas,float*calculoDif,float*calculoDLatam,float*calculosCLatam,float*calculosBLatam,float*calculoULatam);
 
 
 /**esta funcion pide los precios de las aerolineas y los guarda en las variables de tipo float y puntero
  * recibe 3 parametros de tipo float y no devuelve nada ya que es de tipo void
  */
-void pedirDatos(float *kilometros,float *precioAerolineas,float *precioLatam);
+int pedirDatos(int kilometros,float *precioAerolineas,float *precioLatam);
 
 
 #ifndef CALCULO_RESULTADOS_VALIDACIONES_H_

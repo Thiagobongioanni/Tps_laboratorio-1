@@ -12,6 +12,8 @@
 #include <stdlib.h>
 #include "calculo_resultados_.h"
 
+
+int utn_getNumeroEntero(int* pResultado,char* mensaje,char* mensajeError,int minimo,int maximo,int reintentos);
 int main(void)
 {
 	setbuf(stdout,NULL);
@@ -19,7 +21,7 @@ int main(void)
 	//variable utilizada para las opciones del menu
 	int opcion;
 	//aqui se guardan los kilometros ingresados
-	float kilometros=0;
+	int kilometros=0;
 	//precios ingresados
     float precioAerolineas;
 	float precioLatam;
@@ -37,23 +39,38 @@ int main(void)
 	float calculoULatam;
 	//diferencia de precio
 	float calculoDif;
+	//validacion
+	int numeroValido;
 
 
 	do
 	{
-      printf("\n1)Ingresar kilometros  "  "\n2)Ingresar precios de vuelos "	  "\n3)Calcular todos los costos"	  "\n4)Informar resultados"	  "\n5)Carga forzada de datos"	  "\n6)Salir\n");
+	  system("CLS");
+      printf("\n1)Ingresar kilometros %d"
+    		  "\n2)Ingresar precios de vuelos (aerolineas:%.2f) (latam:%.2f)"
+    		  "\n3)Calcular todos los costos"
+    		  "\n4)Informar resultados"
+    		  "\n5)Carga forzada de datos"
+    		  "\n6)Salir\n",kilometros,precioAerolineas,precioLatam);
 	  printf("\ningrese una opcion: ");
 	  scanf("%d", &opcion);
 
 	  switch(opcion)
 	  {
+	    system("pause");
 	     case 1:
-	           printf("\n ingrese los kilometros: ");
-	           scanf("%f", &kilometros);
+	    	 numeroValido = utn_getNumeroEntero(&kilometros,"ingrese los kilometros: ","cantidad invalida/n",0,20000,2);
+	    	 if(numeroValido==0)
+	    	 {
+	    		printf("numero valido");
+	    	 }
 	     break;
 
 	     case 2:
-	    	 pedirDatos(&kilometros,&precioAerolineas,&precioLatam);
+	    	 if (numeroValido==0)
+	    	 {
+	    	     pedirDatos(kilometros,&precioAerolineas,&precioLatam);
+	    	 }
 	     break;
 
 	     case 3:
@@ -62,12 +79,15 @@ int main(void)
 
 	     case 4:
 	    	 mostrarResultados(kilometros,precioAerolineas,precioLatam,calculoDAerolineas,calculoDLatam,calculoCAerolineas,calculosCLatam,calculosBAerolineas,calculosBLatam,calculoUAerolineas,calculoULatam,calculoDif);
+	    	 system("pause");
 	     break;
 
 	     case 5:
 	    	 cargaForzada();
+	    	 system("pause");
 	     break;
 	     case 6:
+	    	 system("pause");
 	     break;
 
 	     default:
@@ -77,4 +97,28 @@ int main(void)
 	}while(opcion!=6);
 
 	return 0;
+}
+int utn_getNumeroEntero(int* pResultado,char* mensaje,char* mensajeError,int minimo,int maximo,int reintentos)
+{
+	int bufferInt;
+	int retorno=-1;
+	if(pResultado != NULL && mensaje != NULL && mensajeError != NULL && minimo <= maximo && reintentos >= 0)
+	{
+	  do{
+	     printf("%s",mensaje);
+	     scanf("%d",&bufferInt);
+	     if(bufferInt >=minimo && bufferInt <=maximo)
+	     {
+	    	*pResultado=bufferInt;
+	    	retorno=0;
+	    	break;
+	     }
+	     else
+	     {
+	    	 printf("%s",mensajeError);
+	    	 reintentos--;
+	     }
+	  }while(reintentos >=0);
+	}
+	return retorno;
 }

@@ -55,7 +55,7 @@ float calculoDiferenciaPrecios(float precioAero,float precioLatam){
 }
 void cargaForzada()
 {
-	float kilometrosF = 7090;
+	int kilometrosF = 7090;
     float precioAerolineasF=162965;
     float precioLatamF=159339;
 
@@ -81,7 +81,7 @@ void cargaForzada()
 		    	    calculosBLatamF=calculosBitcoin(precioLatamF);
 		    	    calculoULatamF=calculoUnitario(kilometrosF,precioLatamF);
 
-		    	    printf("\nKMs ingresados: %f km\n",kilometrosF);
+		    	    printf("\nKMs ingresados: %d km\n",kilometrosF);
 
 		    	    printf("\nprecio aerolineas:$ %.2f",precioAerolineasF);
 
@@ -99,9 +99,9 @@ void cargaForzada()
 		    	    printf("\nla diferencia de precio es %.2f\n",calculoDifF);
 }
 
-void mostrarResultados(float kilometros,float precioAerolineas,float precioLatam,float calculoDAerolineas,float calculoDLatam,float calculoCAerolineas,float calculosCLatam,float calculosBAerolineas,float calculosBLatam,float calculoUAerolineas,float calculoULatam,float calculoDif)
+void mostrarResultados(int kilometros,float precioAerolineas,float precioLatam,float calculoDAerolineas,float calculoDLatam,float calculoCAerolineas,float calculosCLatam,float calculosBAerolineas,float calculosBLatam,float calculoUAerolineas,float calculoULatam,float calculoDif)
 {
-	 printf("\nKMs ingresados: %f km\n",kilometros);
+	 printf("\nKMs ingresados: %d km\n",kilometros);
 
      printf("\nprecio aerolineas:$ %.2f",precioAerolineas);
 
@@ -142,14 +142,27 @@ float funcionesDeCalculo(int kilometros,float precioAerolineas,float precioLatam
 	return 0;
 }
 
-void pedirDatos(float *kilometros,float *precioAerolineas,float *precioLatam)
+int pedirDatos(int kilometros,float *precioAerolineas,float *precioLatam)
 {
+	int retorno=-1;
+	      if(precioAerolineas != NULL && precioLatam != NULL )
+	      {
+	         if(kilometros > 0 && kilometros < 20000)
+	         {
 	    	    printf("ingrese el precio de aereolineas: ");
 	    	    scanf("%f", &*precioAerolineas);
 
 	    	 	printf("ingrese el precio de latam: ");
 	    	    scanf("%f", &*precioLatam);
-
+	    	    retorno=0;
+	         }
+	         else
+	         {
+	        	 printf("los kilometros ingresados no son validos");
+	        	 retorno=-1;
+	         }
+          }
+	     return retorno;
 }
 
 
