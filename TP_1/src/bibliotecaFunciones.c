@@ -2,7 +2,7 @@
  * calculo_resultados_validaciones.c
  *
  *  Created on: 13 abr. 2022
- *      Author: bongi
+ *      Author: bongioanni thiago
  */
 #include <stdio.h>
 #include <stdlib.h>

@@ -2,7 +2,7 @@
  * calculo_resultados_validaciones.h
  *
  *  Created on: 13 abr. 2022
- *      Author: bongi
+ *      Author: bongioanni thiago
  */
 
 /*realiza el calculo correspondiente a la forma de pago y se lo aplica a los precios
