@@ -103,27 +103,30 @@ void mostrarResultados(int kilometros,float precioAerolineas,float precioLatam,f
 {
 	 printf("\nKMs ingresados: %d km\n",kilometros);
 
-     printf("\nprecio aerolineas:$ %.2f",precioAerolineas);
+     printf("\nPrecio aerolineas:$ %.2f",precioAerolineas);
 
-     printf("\nel precio de aerolineas con debito es: %.2f\n",calculoDAerolineas);
-	 printf("el precio de aerolineas con credito es: %.2f\n",calculoCAerolineas);
-     printf("el precio de aerolineas con bitcoin es: %f\n",calculosBAerolineas);
-     printf("\el precio unitario de aerolineas es: %.2f\n",calculoUAerolineas);
+     printf("\na) Precio con tarjeta de debito:$ %.2f\n",calculoDAerolineas);
+	 printf("b) Precio con tarjeta de credito:$ %.2f\n",calculoCAerolineas);
+     printf("c) Precio pagando con bitcoin: %f\n",calculosBAerolineas);
+     printf("d) Precio unitario:$ %.2f\n",calculoUAerolineas);
 
-	 printf("\nprecio  latam:$ %.2f",precioLatam);
+	 printf("\nPrecio  latam:$ %.2f",precioLatam);
 
-     printf("\nel precio de Latam con debito es %.2f\n",calculoDLatam);
-     printf("el precio de latam con credito es: %.2f\n",calculosCLatam);
-     printf("el precio de latam con bitcoin es: %f\n",calculosBLatam);
-	 printf("\el precio unitario de latam es: %.2f\n",calculoULatam);
-     printf("\nla diferencia de precio es %.2f\n",calculoDif);
+     printf("\na) Precio con tarjeta de debito es$ %.2f\n",calculoDLatam);
+     printf("b) Precio con tarjeta de credito es:$ %.2f\n",calculosCLatam);
+     printf("c) Precio pagando con bitcoin es: %f\n",calculosBLatam);
+	 printf("d) Precio unitario:$ %.2f\n",calculoULatam);
+
+     printf("\nLa diferencia de precio es:$ %.2f\n",calculoDif);
 
 }
 
 float funcionesDeCalculo(int kilometros,float precioAerolineas,float precioLatam,float*calculoDAerolineas,float*calculoCAerolineas,float*calculosBAerolineas,float*calculoUAerolineas,float*calculoDif,float*calculoDLatam,float*calculosCLatam,float*calculosBLatam,float*calculoULatam)
 {
+         int retorno=-1;
 
-
+	             if(calculoDAerolineas != NULL && calculoCAerolineas != NULL &&  calculosBAerolineas != NULL && calculoUAerolineas != NULL && calculoDif != NULL && calculoDLatam != NULL && calculosCLatam != NULL && calculosBLatam != NULL && calculoULatam != NULL)
+		           {
 	                if(precioAerolineas >= 0 && precioLatam >= 0)
 		            {
 		               *calculoDAerolineas=calculosDebito(precioAerolineas);
@@ -137,9 +140,11 @@ float funcionesDeCalculo(int kilometros,float precioAerolineas,float precioLatam
 		    	       *calculosCLatam=calculosCredito(precioLatam);
 		    	       *calculosBLatam=calculosBitcoin(precioLatam);
 		    	       *calculoULatam=calculoUnitario(kilometros,precioLatam);
+		    	       retorno=0;
 		            }
+		           }
 
-	return 0;
+	return retorno;
 }
 
 int pedirDatos(int kilometros,float *precioAerolineas,float *precioLatam)
@@ -147,22 +152,51 @@ int pedirDatos(int kilometros,float *precioAerolineas,float *precioLatam)
 	int retorno=-1;
 	      if(precioAerolineas != NULL && precioLatam != NULL )
 	      {
-	         if(kilometros > 0 && kilometros < 20000)
-	         {
 	    	    printf("ingrese el precio de aereolineas: ");
 	    	    scanf("%f", &*precioAerolineas);
 
 	    	 	printf("ingrese el precio de latam: ");
 	    	    scanf("%f", &*precioLatam);
 	    	    retorno=0;
-	         }
-	         else
-	         {
-	        	 printf("los kilometros ingresados no son validos");
-	        	 retorno=-1;
-	         }
           }
+	      if(*precioAerolineas < 0 || *precioAerolineas > 38000 || *precioLatam < 0 || *precioLatam > 38000)
+	      {
+	    	  printf("precios invalidos vuelva a ingresar los precios");
+    	      printf("\ningrese el precio de aereolineas: ");
+    	  	  scanf("%f", &*precioAerolineas);
+
+    	  	  printf("ingrese el precio de latam: ");
+    	  	  scanf("%f", &*precioLatam);
+	    	  retorno=0;
+	      }
+
 	     return retorno;
 }
 
+#include <stdio.h>
+#include <stdlib.h>
 
+int utn_getNumeroEntero(int* pResultado,char* mensaje,char* mensajeError,int minimo,int maximo,int reintentos)
+{
+	int bufferInt;
+	int retorno=-1;
+	if(pResultado != NULL && mensaje != NULL && mensajeError != NULL && minimo <= maximo && reintentos >= 0)
+	{
+	  do{
+	     printf("%s",mensaje);
+	     scanf("%d",&bufferInt);
+	     if(bufferInt >=minimo && bufferInt <=maximo)
+	     {
+	    	*pResultado=bufferInt;
+	    	retorno=0;
+	    	break;
+	     }
+	     else
+	     {
+	    	 printf("%s",mensajeError);
+	    	 reintentos--;
+	     }
+	  }while(reintentos >=0);
+	}
+	return retorno;
+}

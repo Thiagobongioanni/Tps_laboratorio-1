@@ -10,10 +10,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "calculo_resultados_.h"
+#include "bibliotecaFunciones.h"
 
-
-int utn_getNumeroEntero(int* pResultado,char* mensaje,char* mensajeError,int minimo,int maximo,int reintentos);
 int main(void)
 {
 	setbuf(stdout,NULL);
@@ -43,15 +41,12 @@ int main(void)
 	int numeroValido;
 
 
+
 	do
 	{
 	  system("CLS");
-      printf("\n1)Ingresar kilometros %d"
-    		  "\n2)Ingresar precios de vuelos (aerolineas:%.2f) (latam:%.2f)"
-    		  "\n3)Calcular todos los costos"
-    		  "\n4)Informar resultados"
-    		  "\n5)Carga forzada de datos"
-    		  "\n6)Salir\n",kilometros,precioAerolineas,precioLatam);
+      printf("\n1)Ingresar kilometros %d""\n2)Ingresar precios de vuelos (aerolineas:%.2f) (latam:%.2f)" "\n3)Calcular todos los costos" "\n4)Informar resultados""\n5)Carga forzada de datos" "\n6)Salir\n",kilometros,precioAerolineas,precioLatam);
+
 	  printf("\ningrese una opcion: ");
 	  scanf("%d", &opcion);
 
@@ -60,9 +55,9 @@ int main(void)
 	    system("pause");
 	     case 1:
 	    	 numeroValido = utn_getNumeroEntero(&kilometros,"ingrese los kilometros: ","cantidad invalida/n",0,20000,2);
-	    	 if(numeroValido==0)
+	    	 if(numeroValido==-1)
 	    	 {
-	    		printf("numero valido");
+	    		printf("numero invalido");
 	    	 }
 	     break;
 
@@ -74,7 +69,7 @@ int main(void)
 	     break;
 
 	     case 3:
-	    	 funcionesDeCalculo(kilometros,precioAerolineas,precioLatam,&calculoDAerolineas,&calculoCAerolineas,&calculosBAerolineas,&calculoUAerolineas,&calculoDif,&calculoDLatam,&calculosCLatam,&calculosBLatam,&calculoULatam);
+	    	    funcionesDeCalculo(kilometros,precioAerolineas,precioLatam,&calculoDAerolineas,&calculoCAerolineas,&calculosBAerolineas,&calculoUAerolineas,&calculoDif,&calculoDLatam,&calculosCLatam,&calculosBLatam,&calculoULatam);
 	     break;
 
 	     case 4:
@@ -86,8 +81,8 @@ int main(void)
 	    	 cargaForzada();
 	    	 system("pause");
 	     break;
+
 	     case 6:
-	    	 system("pause");
 	     break;
 
 	     default:
@@ -95,30 +90,6 @@ int main(void)
 	     break;
 	  }
 	}while(opcion!=6);
-//
+
 	return 0;
-}
-int utn_getNumeroEntero(int* pResultado,char* mensaje,char* mensajeError,int minimo,int maximo,int reintentos)
-{
-	int bufferInt;
-	int retorno=-1;
-	if(pResultado != NULL && mensaje != NULL && mensajeError != NULL && minimo <= maximo && reintentos >= 0)
-	{
-	  do{
-	     printf("%s",mensaje);
-	     scanf("%d",&bufferInt);
-	     if(bufferInt >=minimo && bufferInt <=maximo)
-	     {
-	    	*pResultado=bufferInt;
-	    	retorno=0;
-	    	break;
-	     }
-	     else
-	     {
-	    	 printf("%s",mensajeError);
-	    	 reintentos--;
-	     }
-	  }while(reintentos >=0);
-	}
-	return retorno;
 }

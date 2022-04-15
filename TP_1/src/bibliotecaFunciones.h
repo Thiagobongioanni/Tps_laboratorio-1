@@ -68,6 +68,10 @@ float funcionesDeCalculo(int kilometros,float precioAerolineas,float precioLatam
  */
 int pedirDatos(int kilometros,float *precioAerolineas,float *precioLatam);
 
+/**
+ *
+ */
+int utn_getNumeroEntero(int* pResultado,char* mensaje,char* mensajeError,int minimo,int maximo,int reintentos);
 
 #ifndef CALCULO_RESULTADOS_VALIDACIONES_H_
 #define CALCULO_RESULTADOS_VALIDACIONES_H_
