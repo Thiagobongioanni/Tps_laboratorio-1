@@ -95,7 +95,7 @@ int main(void)
 	     break;
 	  }
 	}while(opcion!=6);
-
+//
 	return 0;
 }
 int utn_getNumeroEntero(int* pResultado,char* mensaje,char* mensajeError,int minimo,int maximo,int reintentos)
