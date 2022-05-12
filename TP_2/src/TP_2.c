@@ -12,115 +12,77 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include "biblioteca_UTN.h"
-
-
+#include "arrayPassenger.h"
 #define TAM 2
-typedef struct
-{
-	int id;
-	char name[51];
-	char lastName[51];
-	float price;
-	char flyCode[10];
-	int typePassanger;
-    int statusFlight;
-    int isEmpty;
-}passenger;
-
+int removePassenger(passenger list[],passenger aux,int posicion,char respuesta,int tamanio,int id);
 int main(void)
 {
 	int opcion;
+    int posicion=0;
+	char respuesta='n';
 	int retornoF;
-	int i;
-	int id;
+	int id=0;
 	passenger list[TAM];
 	passenger aux;
+
+
+
+	initPassenger(list,aux,TAM);
 
 	do
 		{
 		  //system("CLS");
-	      printf("\n1)ALTAS ""\n2)MODIFICAR" "\n3)BAJA" "\n4)INFORMAR""\n5)Salir\n");
+	      printf("\n1)ALTAS ""\n2)MODIFICAR" "\n3)BAJA" "\n4)INFORMAR""\n5)carga forzada\n6)salir");
 	      retornoF=utn_getNumeroEntero(&opcion,"ingrese una opcion: ","cantidad invalida/n",1,5,2);
 
 
-		  switch(opcion)
-		  {
-		     case 1:
-		    	    for(i=0;i<TAM;i++)
-		    	    {
-		    	    	id++;
-		    	        list[i].id=id;
-		    	 	    printf("\ningrese los datos del pasajero (numero de ID): %d\n",list[i].id);
+	      switch(opcion)
+	      		  {
+	      		     case 1:
 
-		    	 	    printf("\ningrese el nombre: ");
-		    	 	    fflush(stdin);
-		    	 	    gets(list[i].name);
-		    	 	    /*if (isalpha(list[i].name)==0){
-		    	 	        printf("\n NO es un caracter alfabetico vuelva a ingresar los datos: ");
-		    	 	        fflush(stdin);
-		    	 	        gets(list[i].name);
-		    	 	    }*/
+	      		    	 if(retornoF==0)
+	      		    	 {
+	      		    		retornoF=addPassengers(list,TAM,&id);
+	      		    	 }
+	      		     break;
 
+	      		     case 2:
+                         if(retornoF==0)
+                         {
+	      		    	    modificar(list,posicion,aux,TAM,respuesta,id);
+                         }
+                         else
+                         {
+                        	 printf("no hay nada que modificar: ");
+                         }
 
-		    	 	    printf("ingrese el apellido: ");
-		    	 	    fflush(stdin);
-		    	 	    gets(list[i].lastName);
-		    	 	    /*if (isdigit(list[i].lastName)!=0){
-		    	 	        printf("\n NO es un caracter alfabetico vuelva a ingresar los datos: ");
-		    	 	        fflush(stdin);
-		    	 	        gets(list[i].lastName);
-		    	 	    }*/
+	      		     break;
 
-		    	 	    printf("ingrese el precio: ");
-		    	 	    scanf("%f",&list[i].price);
-		    	 	    if (isalpha(list[i].price)==0){
-		    	 	        printf("\n NO es un numero,vuelva a ingresar:");
-		    	 	        fflush(stdin);
-		    	 	        scanf("%f",&list[i].price);
-		    	 	    }
+	      		     case 3:
+	      		    	 if(retornoF==0)
+	      		         {
+	      		    	   removePassenger(list,aux,posicion,respuesta,TAM,id);
+	      		         }
+	      		     break;
 
+	      		     case 4:
 
-		    	 	    printf("\ningrese el codigo del vuelo: ");
-		    	 	    fflush(stdin);
-		    	 	    gets(list[i].flyCode);
+	      		    	  sortPassengers(list,aux,TAM,id);
+	      		    	  //precios total y promedio
+	      		    	  //falta ordenar de manera encolumnada
+	      		    	  //y por codigo de vuelo y eestado de vuelo
 
-		    	 	    printf("ingrese el tipo de pasajero que es: ");
-		    	 	    scanf("%d",&list[i].typePassanger);
+	      		     break;
 
-		    	 	    printf("ingrese el status del vuelo: ");
-		    	 	    scanf("%d",&list[i].statusFlight);
+	      		     case 5:
+	      		    	 //carga forzada
+	      		     break;
 
-		    	 	    list[i].isEmpty=0;
+	      		     default:
+	      		    	     printf("\nopcion no valida");
+	      		     break;
+	      		  }
+	      		}while(opcion!=6);
 
-		    	    }
-
-
-		     break;
-
-		     case 2:
-
-		    	  printf("para modificar datos ingrese la ID del pasajero: ");
-		    	  scanf("%d",&id);
-
-		     break;
-
-		     case 3:
-
-		     break;
-
-		     case 4:
-
-		     break;
-
-		     case 5:
-
-		     break;
-
-		     default:
-		    	     printf("\nopcion no valida");
-		     break;
-		  }
-		}while(opcion!=5);
-
-		return 0;
+	      	return 0;
 }
