@@ -24,6 +24,9 @@ int removePassenger(passenger list[],passenger aux,int posicion,char respuesta,i
 int buscarLibre(passenger list[],int tamanio);
 int menuModificacione(passenger list[],int posicion,char *respuesta);
 int modificar(passenger list[],int posicion,passenger aux,int tamanio,char respuesta,int id);
+int printPassengers(passenger list[],passenger aux,int tamanio,int id);
+int sortPassengersByCode(passenger list[],passenger aux,int tamanio,int id);
+
 
 
 #ifndef ARRAYPASSENGER_H_

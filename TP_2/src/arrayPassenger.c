@@ -19,8 +19,13 @@ int initPassenger(passenger list[],passenger aux,int tamanio)
 
 		    for(i=0;i<tamanio;i++)
 			{
+		    	strcpy(list[i].name,"");
+		        strcpy(list[i].lastName,"");
+		        list[i].price=0;
+		        strcpy(list[i].flyCode," ");
+		        list[i].typePassanger=0;
+		        list[i].statusFlight=0;
 		    	list[i].isEmpty=1;
-		    	aux.isEmpty=1;
 			    retorno=0;
 			}
 
@@ -109,10 +114,7 @@ int sortPassengers(passenger list[],passenger aux,int tamanio,int id)
 				else
 				{
 					id=list[i].id;
-					printf("\nel id es: %d",id);
-			        printf("\n %s, %s, precio: %.2f, flyCode:%s, tipo: %d, estado del vuelo: %d",list[i].name,list[i].lastName,list[i].price,list[i].flyCode,list[i].typePassanger,list[i].statusFlight);
-			        //totalSalary(aEmpleados,tamanio,acumSalary);
-			       // salaryPromedio(aEmpleados,tamanio,contadorE,acumSalary,promedio);
+			        printf("\nel id es: %d %s  tipo:%d  %s precio: %.2f  flyCode:%s estado del vuelo: %d",id,list[i].lastName,list[i].typePassanger,list[i].name,list[i].price,list[i].flyCode,list[i].statusFlight);
 				}
 			}
 		 }
@@ -120,9 +122,11 @@ int sortPassengers(passenger list[],passenger aux,int tamanio,int id)
 }
 int removePassenger(passenger list[],passenger aux,int posicion,char respuesta,int tamanio,int id)
 {
-	int retorno=-1;
-	int retornoF;
-    int i;
+
+		int retorno=-1;
+		int retornoF;
+		int i;
+
 	        if(list != NULL && tamanio > 0 && posicion >= 0)
 	        {
 	           retorno=0;
@@ -154,8 +158,9 @@ int removePassenger(passenger list[],passenger aux,int posicion,char respuesta,i
 		          }
 		       }
 	        }
+
 		return retorno;
-	}
+}
 
 int buscarLibre(passenger list[],int tamanio)
 {
@@ -245,6 +250,7 @@ int modificar(passenger list[],int posicion,passenger aux,int tamanio,char respu
 		int retorno=-1;
 		int retornoF;
 
+
 		     if(list != NULL && posicion >= 0 && tamanio > 0)
 		     {
 		    	retorno=0;
@@ -264,11 +270,75 @@ int modificar(passenger list[],int posicion,passenger aux,int tamanio,char respu
 				}
 				else
 			    {
-				    printf("la id selecionada es del pasajero: %s %s ",list[posicion].name,list[posicion].lastName);
+				     printf("la id selecionada es: %d",list[posicion].id);
+
 				    menuModificacione(list,posicion,&respuesta);
+
 				}
 		     }
 		return retorno;
 	}
+}
+int printPassengers(passenger list[],passenger aux,int tamanio,int id)
+{
+	int retorno=-1;
+	int i;
+
+
+			 if(list != NULL && tamanio > 0)
+			 {
+				retorno=0;
+				for(i=0;i<tamanio;i++)
+				{
+					if(list[i].isEmpty == 1)
+					{
+						continue;
+					}
+					else
+					{
+					    id=list[i].id;
+
+					     printf("\n%d %s, %s, precio: %.2f, flyCode:%s, tipo: %d, estado del vuelo: %d",id,list[i].name,list[i].lastName,list[i].price,list[i].flyCode,list[i].typePassanger,list[i].statusFlight);
+
+					}
+				}
+			 }
+	return retorno;
+}
+int sortPassengersByCode(passenger list[],passenger aux,int tamanio,int id)
+{
+	int retorno=-1;
+		int i;
+		int j;
+
+			 if(list != NULL && tamanio > 0)
+			 {
+				retorno=0;
+			    for(i=0;i<tamanio-1;i++)
+			    {
+				    for(j=i+1;j<tamanio;j++)
+				    {
+					    if((strcmp(list[i].flyCode,list[j].flyCode))>0 && list[i].statusFlight > list[j].statusFlight)
+					    {
+					        aux=list[i];
+					        list[i]=list[j];
+					        list[j]=aux;
+					    }
+					}
+				}
+				for(i=0;i<tamanio;i++)
+				{
+					if(list[i].isEmpty == 1)
+					{
+						continue;
+					}
+					else
+					{
+						id=list[i].id;
+				        printf("\nid:%d  flyCode:%s estado del vuelo:%d %s, %s, precio: %.2f  tipo: %d",id,list[i].flyCode,list[i].statusFlight,list[i].name,list[i].lastName,list[i].price,list[i].typePassanger);
+					}
+				}
+			 }
+	return retorno;
 }
 
