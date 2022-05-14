@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <string.h>
-
+#include "biblioteca_UTN.h"
 int getIntFloat (float* pResultado)
 {
     int retorno = -1;
@@ -90,8 +90,11 @@ int utn_getNumeroEntero(int* pResultado,char* mensaje,char* mensajeError,int min
 	{
 	  do{
 	     printf("%s",mensaje);
+	     fflush(stdin);
 	     scanf("%d",&bufferInt);
-	     if(bufferInt >=minimo && bufferInt <=maximo)
+
+
+	     if(bufferInt >=minimo && bufferInt <=maximo && (isalpha(bufferInt)==0))
 	     {
 	    	*pResultado=bufferInt;
 	    	retorno=0;
@@ -99,10 +102,11 @@ int utn_getNumeroEntero(int* pResultado,char* mensaje,char* mensajeError,int min
 	     }
 	     else
 	     {
-	    	 printf("%s",mensajeError);
+	    	 printf("%s:",mensajeError);
 	    	 reintentos--;
 	     }
-	  }while(reintentos >=0);
+
+	  }while(reintentos >0 );
 	}
 	return retorno;
 }
@@ -115,8 +119,24 @@ int utn_getNombre(char pResultado[],char mensaje[],int tamanio)
 	            printf("%s",mensaje);
 	            fflush(stdin);
 	            fgets(pResultado,tamanio,stdin);
+
 	            pResultado[strlen(pResultado)-1]='\0';
 	            retorno=0;
+
+
+	            for(int i=0;i<1;i++)
+	            {
+	                if((isalpha(pResultado[i])==0))
+	            	{
+	            	    printf("error,vuelva a ingresar: ");
+	            	    fflush(stdin);
+	            	    fgets(pResultado,tamanio,stdin);
+
+	            	    pResultado[strlen(pResultado)-1]='\0';
+	            	    retorno=0;
+
+	             	}
+	            }
 	   }
   return retorno;
 }
